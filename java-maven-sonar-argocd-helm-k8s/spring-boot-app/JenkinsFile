@@ -48,11 +48,13 @@ pipeline {
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                def previousBuildNumber = currentBuild.number - 1
                 sh '''
+                echo "Previous build number: ${previousBuildNumber}"
                     git config user.email "kaustubh007.bpd@gmail.com"
                     git config user.name "kaustubhbal"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
+                    sed -i "s//${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                     rm -r java-maven-sonar-argocd-helm-k8s/spring-boot-app/target
                     git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                     git status
