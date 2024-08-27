@@ -55,7 +55,7 @@ pipeline {
                     git config user.email "kaustubh007.bpd@gmail.com"
                     git config user.name "kaustubhbal"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "kaustubh1609/ultimate-cicd/${previousBuildNumber}/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
+                    sed -i "s/kaustubh1609\\/ultimate-cicd\\/${previousBuildNumber}/kaustubh1609\\/ultimate-cicd\\/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                     rm -r java-maven-sonar-argocd-helm-k8s/spring-boot-app/target
                     git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                     git status
